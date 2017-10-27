@@ -26,6 +26,9 @@ public class Send_text extends Activity {
 
         String[] stringArray = phoneNumber.split(",");
 
+        PermissionsRequest pR = new PermissionsRequest();
+        pR.verify(this);
+
 
         for (int i = 0; i < stringArray.length; i++) {
             sms.sendTextMessage(stringArray[i], null, message, null, null);
