@@ -1,9 +1,13 @@
 package com.example.chad.smstrialapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +29,8 @@ public class Send_text extends Activity {
 
         String[] stringArray = phoneNumber.split(",");
 
+        PermissionsRequest r = new PermissionsRequest();
+        r.verify(this);
 
         for (int i = 0; i < stringArray.length; i++) {
             sms.sendTextMessage(stringArray[i], null, message, null, null);
