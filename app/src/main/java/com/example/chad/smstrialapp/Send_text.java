@@ -33,6 +33,8 @@ public class Send_text extends Activity {
         for (int i = 0; i < stringArray.length; i++) {
             sms.sendTextMessage(stringArray[i], null, message, null, null);
         }
+        Toast.makeText(getApplicationContext(), "Message sent!",
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
