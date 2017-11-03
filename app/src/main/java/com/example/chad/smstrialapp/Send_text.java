@@ -1,4 +1,3 @@
-
 package com.example.chad.smstrialapp;
 
 import android.os.Bundle;
@@ -18,14 +17,14 @@ public class Send_text extends Activity {
     EditText txtPhoneNo;
     EditText txtMessage;
 
-
     private void sendSMS(String  phoneNumber, String  message) {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
                 new Intent(this, Send_text.class), 0);
 
-        SplitPhoneNumber splitNum = null;
-        String[] stringArray = splitNum.split(phoneNumber);
+        // split up phone numbers
+        String[] stringArray = SplitPhoneNumber.split(phoneNumber);
 
+        // send text messages
         SmsManager sms = SmsManager.getDefault();
 
         for (int i = 0; i < stringArray.length; i++) {
