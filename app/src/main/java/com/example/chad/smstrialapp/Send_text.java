@@ -26,8 +26,6 @@ public class Send_text extends Activity {
 
         String[] stringArray = phoneNumber.split(",");
 
-        PermissionsRequest pR = new PermissionsRequest();
-        pR.verify(this);
 
 
         for (int i = 0; i < stringArray.length; i++) {
@@ -45,6 +43,11 @@ public class Send_text extends Activity {
         btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
+
+        // get permissions
+        PermissionsRequest pR = new PermissionsRequest();
+        pR.verify(this);
+
 
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
