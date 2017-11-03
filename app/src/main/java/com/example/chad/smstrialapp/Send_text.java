@@ -26,13 +26,11 @@ public class Send_text extends Activity {
 
         String[] stringArray = phoneNumber.split(",");
 
-        PermissionsRequest pR = new PermissionsRequest();
-        pR.verify(this);
-
-
         for (int i = 0; i < stringArray.length; i++) {
             sms.sendTextMessage(stringArray[i], null, message, null, null);
         }
+        Toast.makeText(getApplicationContext(), "Message sent!",
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -44,6 +42,10 @@ public class Send_text extends Activity {
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
 
+        // get permissions
+        PermissionsRequest pR = new PermissionsRequest();
+        pR.verify(this);
+        
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String phoneNo = txtPhoneNo.getText().toString();
