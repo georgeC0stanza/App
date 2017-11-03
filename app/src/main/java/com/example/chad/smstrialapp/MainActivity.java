@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Send_text.class);
         startActivity(intent);
         }
+
+    public void createTemplate(View view){
+        Intent intent = new Intent(this, EditTemplate.class);
+        startActivity(intent);
+    }
 }

@@ -22,9 +22,11 @@ public class Send_text extends Activity {
     private void sendSMS(String  phoneNumber, String  message) {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
                 new Intent(this, Send_text.class), 0);
-        SmsManager sms = SmsManager.getDefault();
 
-        String[] stringArray = phoneNumber.split(",");
+        SplitPhoneNumber splitNum = null;
+        String[] stringArray = splitNum.split(phoneNumber);
+
+        SmsManager sms = SmsManager.getDefault();
 
         for (int i = 0; i < stringArray.length; i++) {
             sms.sendTextMessage(stringArray[i], null, message, null, null);
@@ -45,7 +47,7 @@ public class Send_text extends Activity {
         // get permissions
         PermissionsRequest pR = new PermissionsRequest();
         pR.verify(this);
-        
+
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String phoneNo = txtPhoneNo.getText().toString();
