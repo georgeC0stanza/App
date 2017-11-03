@@ -19,12 +19,12 @@
         android:layout_height="wrap_content"
         android:text="Message"
         />
+
     <EditText
         android:id="@+id/txtMessage"
         android:layout_width="fill_parent"
-        android:layout_height="150px"
-        android:gravity="top"
-        />
+        android:layout_height="319dp"
+        android:gravity="top" />
     <Button
         android:id="@+id/btnSendSMS"
         android:layout_width="fill_parent"
