@@ -47,6 +47,12 @@ public class Send_text extends Activity {
         PermissionsRequest pR = new PermissionsRequest();
         pR.verify(this);
 
+        TemplateSave ts = new TemplateSave();
+        String appointmentLoad = ts.load(this, "pianoAppointment");
+        Toast.makeText(this, appointmentLoad, Toast.LENGTH_LONG).show();
+
+
+
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String phoneNo = txtPhoneNo.getText().toString();
