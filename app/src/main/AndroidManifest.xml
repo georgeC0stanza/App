@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Send_text" />
-        <activity android:name=".EditTemplate"></activity>
+        <activity android:name=".EditTemplate" />
     </application>
 
 </manifest>
