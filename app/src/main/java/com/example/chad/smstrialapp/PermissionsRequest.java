@@ -7,13 +7,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+// doesn't work in go
+// need to run app twice to load both permissions
 public class PermissionsRequest {
 
     // permissions needed for sending messages
     public void verifySMS(Activity context) {
 
-        // doesn't work in go
-        // need to run app twice to load both permissions
         getPhoneState(context);
         getSms(context);
 
@@ -22,8 +22,6 @@ public class PermissionsRequest {
     // permissions needed for accessing the google calendars
     public void verifyGoogle(Activity context) {
 
-        // doesn't work in go
-        // need to run app twice to load both permissions
         getAccounts(context);
         getAccessNetworkState(context);
         getInternet(context);
