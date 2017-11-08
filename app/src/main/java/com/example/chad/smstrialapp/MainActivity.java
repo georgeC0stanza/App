@@ -13,6 +13,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // get permissions
+        PermissionsRequest pR = new PermissionsRequest();
+        pR.verifyGoogle(this);
     }
     public void CreateText(View view){
         Intent intent = new Intent(this, Send_text.class);

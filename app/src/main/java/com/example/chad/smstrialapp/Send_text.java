@@ -46,7 +46,7 @@ public class Send_text extends Activity {
 
         // get permissions
         PermissionsRequest pR = new PermissionsRequest();
-        pR.verify(this);
+        pR.verifySMS(this);
 
         TemplateSave ts = new TemplateSave();
         final String appointmentLoad = ts.load(this, "pianoAppointment");
