@@ -7,27 +7,25 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-// doesn't work in go
+// doesn't work in one go
 // need to run app twice to load both permissions
 public class PermissionsRequest {
 
     // permissions needed for sending messages
     public void verifySMS(Activity context) {
-
         getPhoneState(context);
         getSms(context);
-
     }
 
     // permissions needed for accessing the google calendars
     public void verifyGoogle(Activity context) {
-
         getAccounts(context);
         getAccessNetworkState(context);
         getInternet(context);
-
     }
-    public void getAccounts(Activity context) {
+
+    // pops up as contacts
+    private void getAccounts(Activity context) {
         // phone state
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.GET_ACCOUNTS)
@@ -57,7 +55,8 @@ public class PermissionsRequest {
         }
     }
 
-    public void getAccessNetworkState(Activity context) {
+    // always allowed in android 6 and up
+    private void getAccessNetworkState(Activity context) {
         // phone state
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_NETWORK_STATE)
@@ -87,8 +86,8 @@ public class PermissionsRequest {
         }
     }
 
-
-    public void getInternet(Activity context) {
+    // always allowed in android 6 an up
+    private void getInternet(Activity context) {
         // phone state
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.INTERNET)
@@ -119,7 +118,7 @@ public class PermissionsRequest {
     }
 
 
-    public void getPhoneState(Activity context) {
+    private void getPhoneState(Activity context) {
         // phone state
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_PHONE_STATE)
@@ -149,7 +148,7 @@ public class PermissionsRequest {
         }
     }
 
-    public void getSms(Activity context) {
+    private void getSms(Activity context) {
 
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.SEND_SMS)
