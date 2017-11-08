@@ -31,5 +31,7 @@ public class TemplateSave {
 
     public void delete(Context context, String templateName){
         sharedPreferences.edit().remove(templateName).commit();
+        Toast.makeText(context, templateName + " removed!",
+                Toast.LENGTH_SHORT).show();
     }
 }
