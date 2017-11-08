@@ -28,4 +28,8 @@ public class TemplateSave {
 
         return templateText;
     }
+
+    public String delete(Context context, String templateName){
+        sharedPreferences.edit().remove(templateName).commit();
+    }
 }
