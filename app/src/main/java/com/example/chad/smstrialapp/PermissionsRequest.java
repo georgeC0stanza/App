@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 public class PermissionsRequest {
 
+    // permissions needed for sending messages
     public void verifySMS(Activity context) {
 
         // doesn't work in go
@@ -17,6 +18,8 @@ public class PermissionsRequest {
         getSms(context);
 
     }
+
+    // permissions needed for accessing the google calendars
     public void verifyGoogle(Activity context) {
 
         // doesn't work in go
