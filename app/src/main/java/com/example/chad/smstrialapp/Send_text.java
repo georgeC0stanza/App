@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class Send_text extends Activity {
 
@@ -28,8 +30,13 @@ public class Send_text extends Activity {
         // send text messages
         SmsManager sms = SmsManager.getDefault();
 
+        // break up long messages
+        ArrayList<String> parts = sms.divideMessage(message);
+
         for (int i = 0; i < stringArray.length; i++) {
-            sms.sendTextMessage(stringArray[i], null, message, null, null);
+        //    sms.sendTextMessage(stringArray[i], null, message, null, null);
+            sms.sendMultipartTextMessage(stringArray[i], null, parts, null, null);
+
         }
         Toast.makeText(getApplicationContext(), "Message sent!",
                 Toast.LENGTH_SHORT).show();
@@ -48,6 +55,7 @@ public class Send_text extends Activity {
         PermissionsRequest pR = new PermissionsRequest();
         pR.verifySMS(this);
 
+        // load template text
         TemplateSave ts = new TemplateSave();
         final String appointmentLoad = ts.load(this, "pianoAppointment");
         Toast.makeText(this, appointmentLoad, Toast.LENGTH_LONG).show();
@@ -56,7 +64,7 @@ public class Send_text extends Activity {
         editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
 
-
+        // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String phoneNo = txtPhoneNo.getText().toString();
