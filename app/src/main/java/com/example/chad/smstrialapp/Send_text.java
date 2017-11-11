@@ -58,7 +58,6 @@ public class Send_text extends Activity {
         // load template text
         TemplateSave ts = new TemplateSave();
         final String appointmentLoad = ts.load(this, "pianoAppointment");
-        Toast.makeText(this, appointmentLoad, Toast.LENGTH_LONG).show();
 
         EditText editText = (EditText)findViewById(R.id.txtMessage);
         editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
