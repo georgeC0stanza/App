@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".Send_text" />
         <activity android:name=".EditTemplate" />
+        <activity android:name=".GoogleCalApi"></activity>
     </application>
 
 </manifest>

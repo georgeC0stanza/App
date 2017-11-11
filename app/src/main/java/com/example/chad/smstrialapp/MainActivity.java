@@ -27,4 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditTemplate.class);
         startActivity(intent);
     }
+
+    public void GoogleGoodness(View view){
+        Intent intent = new Intent(this, GoogleCalApi.class);
+        startActivity(intent);
+    }
 }
