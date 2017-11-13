@@ -372,7 +372,6 @@ public class GoogleCalApi extends Activity
             return eventStrings;
         }
 
-
         @Override
         protected void onPreExecute() {
             mOutputText.setText("");
