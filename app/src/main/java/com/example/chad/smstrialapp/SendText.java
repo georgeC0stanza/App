@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-public class Send_text extends Activity {
+public class SendText extends Activity {
 
     Button btnSendSMS;
     EditText txtPhoneNo;
@@ -37,7 +37,6 @@ public class Send_text extends Activity {
 
         EditText editText = (EditText)findViewById(R.id.txtMessage);
         editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
-
 
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +75,4 @@ public class Send_text extends Activity {
         Toast.makeText(getApplicationContext(), "Message sent!",
                 Toast.LENGTH_SHORT).show();
     }
-
-
 }
