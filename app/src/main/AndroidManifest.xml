@@ -22,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Send_text" />
+        <activity android:name=".SendText" />
         <activity android:name=".EditTemplate" />
-        <activity android:name=".GoogleCalApi"></activity>
+        <activity android:name=".GoogleCalApi" />
+        <activity android:name=".parseCalendar"></activity>
     </application>
 
 </manifest>
