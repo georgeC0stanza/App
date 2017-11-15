@@ -40,15 +40,6 @@ public class SendText extends Activity {
         EditText editText = (EditText)findViewById(R.id.txtMessage);
         editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
-
-        GetApointment app = new GetApointment();
-        try {
-            app.CalendarMethod(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
