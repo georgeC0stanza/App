@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class Send_text extends Activity {
+public class SendText extends Activity {
 
     Button btnSendSMS;
     EditText txtPhoneNo;
@@ -22,7 +22,7 @@ public class Send_text extends Activity {
 
     private void sendSMS(String  phoneNumber, String  message) {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
-                new Intent(this, Send_text.class), 0);
+                new Intent(this, SendText.class), 0);
 
         // split up phone numbers
         String[] stringArray = SplitPhoneNumber.split(phoneNumber);

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         pR.verifyGoogle(this);
     }
     public void CreateText(View view){
-        Intent intent = new Intent(this, Send_text.class);
+        Intent intent = new Intent(this, SendText.class);
         startActivity(intent);
         }
 
