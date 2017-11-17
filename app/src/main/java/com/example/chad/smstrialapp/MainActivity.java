@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void GoogleGoodness(View view){
+    public void GoogleGoodness(View view) throws IOException {
         Intent intent = new Intent(this, GoogleCalApi.class);
         startActivity(intent);
+        //GetApointment ga = new GetApointment();
+        //ga.CalendarMethod(this);
     }
 }
