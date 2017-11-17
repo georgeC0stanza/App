@@ -9,6 +9,10 @@ import android.widget.Toast;
 
 // doesn't work in one go
 // need to run app twice to load both permissions
+
+/*****************************************************
+ * code examples from https://developer.android.com/training/permissions/requesting.html
+ */
 public class PermissionsRequest {
 
     // permissions needed for sending messages

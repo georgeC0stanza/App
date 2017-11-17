@@ -46,6 +46,4 @@ public class GetApointment {
             pageToken = events.getNextPageToken();
         } while (pageToken != null);
     }
-
-    
 }
