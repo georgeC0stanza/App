@@ -41,8 +41,8 @@ public class GetApointment {
 
 // Retrieve an event
 
-        Events events = service.events().list('primary').getTimeMin("2013-06-13T09:00:00-07:00").execute();
-        List<Event> items = events.getItems();
+        //Events events = service.events().list('primary').getTimeMin("2013-06-13T09:00:00-07:00").execute();
+        //List<Event> items = events.getItems();
 
     }
 }

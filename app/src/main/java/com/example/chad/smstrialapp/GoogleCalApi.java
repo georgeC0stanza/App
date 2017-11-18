@@ -349,17 +349,22 @@ public class GoogleCalApi extends Activity
          */
         private List<String> getDataFromApi() throws IOException {
             // List the next 10 events from the primary calendar.
-            DateTime now = new DateTime(System.currentTimeMillis());
+            //DateTime now = new DateTime(System.currentTimeMillis());
+            DateTime startday = new DateTime("2017-11-17T00:00:00-07:00");
+            DateTime endday = new DateTime("2017-11-17T23:59:59-07:00");
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("primary")
-                    .setMaxResults(10)
-                    .setTimeMin(now)
+                    //.setMaxResults(10)
+                    .setTimeMax(endday)
+                    .setTimeMin(startday)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
                     .execute();
             List<Event> items = events.getItems();
 
             for (Event event : items) {
+                String title = event.getSummary();
+                String notes = event.getDescription();
                 DateTime start = event.getStart().getDateTime();
                 if (start == null) {
                     // All-day events don't have start times, so just use
@@ -367,7 +372,7 @@ public class GoogleCalApi extends Activity
                     start = event.getStart().getDate();
                 }
                 eventStrings.add(
-                        String.format("%s (%s)", event.getSummary(), start));
+                        String.format("%s + (%s) + [%s]", start, title, notes));
             }
             return eventStrings;
         }
