@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,29 +24,28 @@ import java.util.ArrayList;
  ***********************************************************************/
 public class SendText extends Activity {
 
+    Button btnLoadSMS;
     Button btnSendSMS;
     EditText txtPhoneNo;
     EditText txtMessage;
+    private static final String tag = "Captains Log: ";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_text);
 
+        btnLoadSMS = (Button) findViewById(R.id.loadTemp);
         btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
+        String appointmentLoad = null;
 
         // get permissions
         PermissionsRequest pR = new PermissionsRequest();
         pR.verifySMS(this);
 
-        // load template text
-        TemplateSave ts = new TemplateSave();
-        final String appointmentLoad = ts.load(this, "pianoAppointment");
-
-        EditText editText = (EditText)findViewById(R.id.txtMessage);
-        editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +61,29 @@ public class SendText extends Activity {
                     Toast.makeText(getBaseContext(),
                             "Please enter both phone number and message.",
                             Toast.LENGTH_SHORT).show();
+                Log.d(tag, "Sent Message");
+            }
+        });
+
+        btnLoadSMS.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+
+                // load template text
+                TemplateSave ts = new TemplateSave();
+                final String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
+
+                EditText editText = (EditText)findViewById(R.id.txtMessage);
+                editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
+
+
+                Log.d(tag, "Sent Message");
             }
         });
     }
+
+
 
     private void sendSMS(String  phoneNumber, String  message) {
 //        PendingIntent pi = PendingIntent.getActivity(this, 0,
