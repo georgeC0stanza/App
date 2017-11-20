@@ -347,7 +347,7 @@ public class GoogleCalApi extends Activity
          * @return List of Strings describing returned events.
          * @throws IOException
          */
-        private List<String> getDataFromApi() throws IOException {
+        public List<String> getDataFromApi() throws IOException {
             // List the next 10 events from the primary calendar.
             //DateTime now = new DateTime(System.currentTimeMillis());
             DateTime startday = new DateTime("2017-11-17T00:00:00-07:00");

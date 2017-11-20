@@ -68,11 +68,18 @@ public class SendText extends Activity {
         btnLoadSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                String name = "Hello";
+                String start = "beverly";
+                String date = "Jackson";
 
 
                 // load template text
                 TemplateSave ts = new TemplateSave();
-                final String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
+                String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
+
+                PopulateTemplate pt = new PopulateTemplate();
+
+                appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
                 EditText editText = (EditText)findViewById(R.id.txtMessage);
                 editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
