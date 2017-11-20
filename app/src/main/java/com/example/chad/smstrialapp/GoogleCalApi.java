@@ -392,6 +392,10 @@ public class GoogleCalApi extends Activity
                 output.add(0, "Data retrieved using the Google Calendar API:");
                 mOutputText.setText(TextUtils.join("\n", output));
             }
+            //save to sharedpref
+            TemplateSave ts = new TemplateSave();
+            ts.save(GoogleCalApi.this, "events", output.toString());
+
         }
 
         @Override

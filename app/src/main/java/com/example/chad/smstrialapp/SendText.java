@@ -76,8 +76,12 @@ public class SendText extends Activity {
                 // load template text
                 TemplateSave ts = new TemplateSave();
                 String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
+                String events = ts.load(SendText.this, "events");
 
                 PopulateTemplate pt = new PopulateTemplate();
+
+                date = events.substring(0, 29);
+               // start = events.substring();
 
                 appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
