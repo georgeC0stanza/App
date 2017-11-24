@@ -80,8 +80,9 @@ public class SendText extends Activity {
 
                 PopulateTemplate pt = new PopulateTemplate();
 
-                date = events.substring(0, 29);
-               // start = events.substring();
+                date = events.substring(1, 10);
+                start = events.substring(12, 17);
+                name = events.substring(events.indexOf("(") + 1, events.indexOf(")"));
 
                 appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 

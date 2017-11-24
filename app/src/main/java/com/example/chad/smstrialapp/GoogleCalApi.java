@@ -388,13 +388,15 @@ public class GoogleCalApi extends Activity
             mProgress.hide();
             if (output == null || output.size() == 0) {
                 mOutputText.setText("No results returned.");
+
             } else {
+                //save to sharedpref
+                TemplateSave ts = new TemplateSave();
+                ts.save(GoogleCalApi.this, "events", output.toString());
                 output.add(0, "Data retrieved using the Google Calendar API:");
                 mOutputText.setText(TextUtils.join("\n", output));
             }
-            //save to sharedpref
-            TemplateSave ts = new TemplateSave();
-            ts.save(GoogleCalApi.this, "events", output.toString());
+
 
         }
 
