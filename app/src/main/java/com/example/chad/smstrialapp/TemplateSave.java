@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Set;
+
 public class TemplateSave {
 
     private SharedPreferences sharedPreferences;
@@ -18,16 +20,32 @@ public class TemplateSave {
     public void save(Context context, String templateName, String templateText) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         editor.putString(templateName, templateText);
-        editor.commit();
+        editor.apply();
         Toast.makeText(context, "saved!",
                 Toast.LENGTH_SHORT).show();
         Log.d(tag, "Saved Template");
+    }
 
+    public void saveSet(Context context, String templateName, Set<String> templateText){
+        SharedPreferences.Editor editor = getPrefs(context).edit();
+
+        editor.putStringSet(templateName, templateText);
+        editor.apply();
+
+        Toast.makeText(context, "saved!",
+                Toast.LENGTH_SHORT).show();
     }
 
     public String load(Context context, String templateName){
 
         String templateText = (getPrefs(context).getString(templateName, ""));
+
+        return templateText;
+    }
+
+    public Set<String> loadSet(Context context, String templateName){
+
+        Set<String> templateText = (getPrefs(context).getStringSet(templateName, null));
 
         return templateText;
     }
