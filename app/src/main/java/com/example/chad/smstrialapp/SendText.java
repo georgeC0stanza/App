@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.Stack;
 
 /* code examples from https://mobiforge.com/design-development/sms-messaging-android
  */
@@ -78,13 +80,20 @@ public class SendText extends Activity {
                 // load template text
                 TemplateSave ts = new TemplateSave();
                 String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
-                String events = ts.load(SendText.this, "events");
+                Set<String> events = ts.loadSet(SendText.this, "events");
+
+                //String event = events[1];
+
+                Stack<String> stack = new Stack<>(); //2 Create new stack
+                stack.addAll(events);
+
+                String event = stack.peek();
 
                 PopulateTemplate pt = new PopulateTemplate();
 
-                date = events.substring(1, 10);
-                start = events.substring(12, 17);
-                name = events.substring(events.indexOf("(") + 1, events.indexOf(")"));
+                date = event.substring(1, 10);
+                start = event.substring(12, 17);
+                name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
 
                 appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
@@ -159,7 +168,7 @@ public class SendText extends Activity {
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_NULL_PDU:
-                        Toast.makeText(getBaseContext(),  "Error on " + phoneNumber + ": Null PDU",
+                        Toast.makeText(getBaseContext(), "Error on " + phoneNumber + ": Null PDU",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_RADIO_OFF:
