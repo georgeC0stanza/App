@@ -18,10 +18,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/***********************************************************************
- * code examples from https://mobiforge.com/design-development/sms-messaging-android
- *
- ***********************************************************************/
+/* code examples from https://mobiforge.com/design-development/sms-messaging-android
+ */
 public class SendText extends Activity {
 
     Button btnLoadSMS;
@@ -30,7 +28,11 @@ public class SendText extends Activity {
     EditText txtMessage;
     private static final String tag = "Captains Log: ";
 
-
+    /**
+     * creates the buttons, calls for permissions, fills in the text from the saved template,
+     * fills in the template markers with actual information.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +98,11 @@ public class SendText extends Activity {
     }
 
 
-
+    /**
+     * takes each phone number and sends it a message with the text in the text view
+     * @param phoneNumber
+     * @param message
+     */
     private void sendSMS(String  phoneNumber, String  message) {
 //        PendingIntent pi = PendingIntent.getActivity(this, 0,
 //                new Intent(this, Send_text.class), 0);
