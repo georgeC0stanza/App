@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SMSTrialApp</string>
+    <string name="title_activity_obtain_dates">obtainDates</string>
 </resources>

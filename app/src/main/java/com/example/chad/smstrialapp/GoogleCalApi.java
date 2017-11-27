@@ -37,8 +37,10 @@ import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -350,8 +352,21 @@ public class GoogleCalApi extends Activity
         public List<String> getDataFromApi() throws IOException {
             // List the next 10 events from the primary calendar.
             //DateTime now = new DateTime(System.currentTimeMillis());
-            DateTime startday = new DateTime("2017-11-17T00:00:00-07:00");
-            DateTime endday = new DateTime("2017-11-17T23:59:59-07:00");
+            //SimpleDateFormat curFormater = new SimpleDateFormat("");
+            String dt = "2017-11-27";
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 1);
+            dt = df.format(c.getTime());
+
+            String startDate = "2017-11-17";
+            String timestart = "T00:00:00";
+            String endDate = "2017-11-17";
+            String endTime = "T23:59:59";
+            String offset = "-07:00";
+
+            DateTime startday = new DateTime(dt + timestart + offset);
+            DateTime endday = new DateTime(dt + endTime + offset);
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("primary")
                     //.setMaxResults(10)
