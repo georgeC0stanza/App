@@ -123,6 +123,11 @@ public class SendText extends Activity {
         }
     }
 
+    /**
+     * sends sms messages
+     * @param phoneNumber
+     * @param message
+     */
     //---sends an SMS message to another device---
     private void sendCheckSMS(final String phoneNumber, String message)
     {
