@@ -30,8 +30,6 @@
         <activity android:name=".SendText" />
         <activity android:name=".EditTemplate" />
         <activity android:name=".GoogleCalApi" />
-        <activity android:name=".parseCalendar" />
-        <activity android:name=".obtainDate"></activity>
     </application>
 
 </manifest>

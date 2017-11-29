@@ -361,9 +361,7 @@ public class GoogleCalApi extends Activity
             c.add(Calendar.DATE, 1);
             dt = df.format(c.getTime());
 
-            String startDate = "2017-11-17";
             String timestart = "T00:00:00";
-            String endDate = "2017-11-17";
             String endTime = "T23:59:59";
             String offset = "-07:00";
 

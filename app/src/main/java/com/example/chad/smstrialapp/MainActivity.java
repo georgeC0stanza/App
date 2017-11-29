@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         PermissionsRequest pR = new PermissionsRequest();
         pR.verifyGoogle(this);
     }
-    public void CreateText(View view){
+        public void CreateText(View view){
         Intent intent = new Intent(this, SendText.class);
         startActivity(intent);
         }
@@ -33,7 +33,5 @@ public class MainActivity extends AppCompatActivity {
     public void GoogleGoodness(View view) throws IOException {
         Intent intent = new Intent(this, GoogleCalApi.class);
         startActivity(intent);
-        //GetApointment ga = new GetApointment();
-        //ga.CalendarMethod(this);
     }
 }
