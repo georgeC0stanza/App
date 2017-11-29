@@ -87,21 +87,25 @@ public class SendText extends Activity {
                 Stack<String> stack = new Stack<>(); //2 Create new stack
                 stack.addAll(events);
 
-                String event = stack.peek();
+                for(String i : stack) {
 
-                PopulateTemplate pt = new PopulateTemplate();
+                    String event = stack.peek();
+                    stack.pop();
 
-                date = event.substring(1, 10);
-                start = event.substring(12, 17);
-                name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
+                    PopulateTemplate pt = new PopulateTemplate();
 
-                appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
+                    date = event.substring(1, 10);
+                    start = event.substring(11, 17);
+                    name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
 
-                EditText editText = (EditText)findViewById(R.id.txtMessage);
-                editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
+                    appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
+
+                    EditText editText = (EditText) findViewById(R.id.txtMessage);
+                    editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
 
-                Log.d(tag, "Sent Message");
+                    Log.d(tag, "Sent Message");
+                }
             }
         });
     }

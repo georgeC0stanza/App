@@ -41,7 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -353,7 +355,7 @@ public class GoogleCalApi extends Activity
             // List the next 10 events from the primary calendar.
             //DateTime now = new DateTime(System.currentTimeMillis());
             //SimpleDateFormat curFormater = new SimpleDateFormat("");
-            String dt = "2017-11-27";
+            String dt = "2017-11-22";
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DATE, 1);
@@ -405,9 +407,11 @@ public class GoogleCalApi extends Activity
                 mOutputText.setText("No results returned.");
 
             } else {
+                Set<String> events = new HashSet<String>(output);
+                //String outputClone = output.toString();
                 //save to sharedpref
                 TemplateSave ts = new TemplateSave();
-                ts.save(GoogleCalApi.this, "events", output.toString());
+                ts.saveSet(GoogleCalApi.this, "events", events);
                 output.add(0, "Data retrieved using the Google Calendar API:");
                 mOutputText.setText(TextUtils.join("\n", output));
             }
