@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
+import org.apache.commons.collections4.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
@@ -44,7 +43,7 @@ public class SendText extends Activity {
         btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
-        String appointmentLoad = null;
+        final String appointmentLoad = null;
 
         // get permissions
         PermissionsRequest pR = new PermissionsRequest();
@@ -54,62 +53,68 @@ public class SendText extends Activity {
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                fillSMS(appointmentLoad);
                 String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
 //                String message = appointmentLoad;
 
-                if (phoneNo.length() > 0 && message.length() > 0)
+                if (phoneNo.length() > 0 && message.length() > 0) {
+
                     sendSMS(phoneNo, message);
 //                    sendCheckSMS(phoneNo, message);
-                else
+                }
+                else {
                     Toast.makeText(getBaseContext(),
                             "Please enter both phone number and message.",
                             Toast.LENGTH_SHORT).show();
-                Log.d(tag, "Sent Message");
+                    Log.d(tag, "Send Message sms");
+                }
             }
         });
 
         btnLoadSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                String name = "Hello";
-                String start = "beverly";
-                String date = "Jackson";
-
-
                 // load template text
                 TemplateSave ts = new TemplateSave();
                 String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
-                Set<String> events = ts.loadSet(SendText.this, "events");
 
-                //String event = events[1];
-
-                Stack<String> stack = new Stack<>(); //2 Create new stack
-                stack.addAll(events);
-
-                for(String i : stack) {
-
-                    String event = stack.peek();
-                    stack.pop();
-
-                    PopulateTemplate pt = new PopulateTemplate();
-
-                    date = event.substring(1, 10);
-                    start = event.substring(11, 17);
-                    name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
-
-                    appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
-
-                    EditText editText = (EditText) findViewById(R.id.txtMessage);
-                    editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
-
-
-                    Log.d(tag, "Sent Message");
-                }
+                EditText editText = (EditText) findViewById(R.id.txtMessage);
+                editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
             }
         });
     }
 
+    private void fillSMS(String appointmentLoad) {
+        String name = "";
+        String start = "";
+        String date = "";
+
+        // load calendar events into stack
+        TemplateSave ts = new TemplateSave();
+        Set<String> appointmentLoadSet = ts.loadSet(SendText.this, "events");
+        Stack<String> events = new Stack<>();
+
+        if (CollectionUtils.isNotEmpty(appointmentLoadSet))
+            events.addAll(appointmentLoadSet);
+
+        while(!events.empty()) {
+            String event = events.peek();
+            events.pop();
+
+            PopulateTemplate pt = new PopulateTemplate();
+
+            date = event.substring(1, 10);
+            start = event.substring(11, 17);
+            name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
+
+            appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
+
+            EditText editText = (EditText) findViewById(R.id.txtMessage);
+            editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
+
+            Log.d(tag, "Load Message");
+        }
+    }
 
     /**
      * takes each phone number and sends it a message with the text in the text view
@@ -137,7 +142,7 @@ public class SendText extends Activity {
     }
 
     /**
-     * sends sms messages
+     * sends sms messages and listens to the status
      * @param phoneNumber
      * @param message
      */
