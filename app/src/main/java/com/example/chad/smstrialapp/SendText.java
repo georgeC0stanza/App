@@ -28,7 +28,7 @@ public class SendText extends Activity {
     EditText txtPhoneNo;
     EditText txtMessage;
     private static final String tag = "Captains Log: ";
-
+    String appointmentLoad = null;
     /**
      * creates the buttons, calls for permissions, fills in the text from the saved template,
      * fills in the template markers with actual information.
@@ -43,7 +43,7 @@ public class SendText extends Activity {
         btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
-        final String appointmentLoad = null;
+
 
         // get permissions
         PermissionsRequest pR = new PermissionsRequest();
@@ -53,11 +53,12 @@ public class SendText extends Activity {
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                fillSMS(appointmentLoad);
+
                 String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
-//                String message = appointmentLoad;
-
+                appointmentLoad = message;
+                fillSMS(appointmentLoad);
+            /*
                 if (phoneNo.length() > 0 && message.length() > 0) {
 
                     sendSMS(phoneNo, message);
@@ -69,6 +70,7 @@ public class SendText extends Activity {
                             Toast.LENGTH_SHORT).show();
                     Log.d(tag, "Send Message sms");
                 }
+                */
             }
         });
 
@@ -94,10 +96,11 @@ public class SendText extends Activity {
         Set<String> appointmentLoadSet = ts.loadSet(SendText.this, "events");
         Stack<String> events = new Stack<>();
 
+
         if (CollectionUtils.isNotEmpty(appointmentLoadSet))
             events.addAll(appointmentLoadSet);
 
-        while(!events.empty()) {
+            while(!events.empty()) {
             String event = events.peek();
             events.pop();
 
@@ -113,6 +116,20 @@ public class SendText extends Activity {
             editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
             Log.d(tag, "Load Message");
+
+                String phoneNo = txtPhoneNo.getText().toString();
+                String message = txtMessage.getText().toString();
+                if (phoneNo.length() > 0 && message.length() > 0) {
+
+                    sendSMS(phoneNo, message);
+//                    sendCheckSMS(phoneNo, message);
+                }
+                else {
+                    Toast.makeText(getBaseContext(),
+                            "Please enter both phone number and message.",
+                            Toast.LENGTH_SHORT).show();
+                    Log.d(tag, "Send Message sms");
+                }
         }
     }
 
