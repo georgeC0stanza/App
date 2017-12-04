@@ -347,14 +347,13 @@ public class GoogleCalApi extends Activity
         }
 
         /**
-         * Fetch a list of the next 10 events from the primary calendar.
+         * Fetch a list of calendar events for tomorrow, this will return start date,
+         * the title and the notes.
          * @return List of Strings describing returned events.
          * @throws IOException
          */
         public List<String> getDataFromApi() throws IOException {
-            // List the next 10 events from the primary calendar.
-            //DateTime now = new DateTime(System.currentTimeMillis());
-            //SimpleDateFormat curFormater = new SimpleDateFormat("");
+            //get tommorows date
             String dt = "2017-11-22";
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c = Calendar.getInstance();
@@ -364,12 +363,11 @@ public class GoogleCalApi extends Activity
             String timestart = "T00:00:00";
             String endTime = "T23:59:59";
             String offset = "-07:00";
-
+            // set
             DateTime startday = new DateTime(dt + timestart + offset);
             DateTime endday = new DateTime(dt + endTime + offset);
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("primary")
-                    //.setMaxResults(10)
                     .setTimeMax(endday)
                     .setTimeMin(startday)
                     .setOrderBy("startTime")
@@ -406,7 +404,6 @@ public class GoogleCalApi extends Activity
 
             } else {
                 Set<String> events = new HashSet<String>(output);
-                //String outputClone = output.toString();
                 //save to sharedpref
                 TemplateSave ts = new TemplateSave();
                 ts.saveSet(GoogleCalApi.this, "events", events);
