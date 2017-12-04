@@ -54,7 +54,7 @@ public class SendText extends Activity {
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                String phoneNo = txtPhoneNo.getText().toString();
+ //               String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
                 appointmentLoad = message;
                 fillSMS(appointmentLoad);
@@ -90,6 +90,7 @@ public class SendText extends Activity {
         String name = "";
         String start = "";
         String date = "";
+        String phoneNo = "";
 
         // load calendar events into stack
         TemplateSave ts = new TemplateSave();
@@ -101,7 +102,10 @@ public class SendText extends Activity {
             events.addAll(appointmentLoadSet);
 
             while(!events.empty()) {
-            String event = events.peek();
+                String message = txtMessage.getText().toString();
+                appointmentLoad = message;
+
+                String event = events.peek();
             events.pop();
 
             PopulateTemplate pt = new PopulateTemplate();
@@ -109,27 +113,27 @@ public class SendText extends Activity {
             date = event.substring(1, 10);
             start = event.substring(11, 17);
             name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
-
+            phoneNo = event.substring(event.indexOf("[") + 1, event.indexOf("]"));
             appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
-            EditText editText = (EditText) findViewById(R.id.txtMessage);
-            editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
+         //   EditText editText = (EditText) findViewById(R.id.txtMessage);
+          //  editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
             Log.d(tag, "Load Message");
 
-                String phoneNo = txtPhoneNo.getText().toString();
-                String message = txtMessage.getText().toString();
-                if (phoneNo.length() > 0 && message.length() > 0) {
+                //String phoneNo = txtPhoneNo.getText().toString();
+          //     String message = txtMessage.getText().toString();
+                //if (phoneNo.length() > 0 && message.length() > 0) {
 
-                    sendSMS(phoneNo, message);
+                    sendSMS(phoneNo, appointmentLoad);
 //                    sendCheckSMS(phoneNo, message);
-                }
-                else {
+                //}
+                //else {
                     Toast.makeText(getBaseContext(),
                             "Please enter both phone number and message.",
                             Toast.LENGTH_SHORT).show();
                     Log.d(tag, "Send Message sms");
-                }
+                //}
         }
     }
 
