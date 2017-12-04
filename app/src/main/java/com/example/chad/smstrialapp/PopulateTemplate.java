@@ -6,8 +6,6 @@ package com.example.chad.smstrialapp;
 
 public class PopulateTemplate {
     public String pTemplate(String message, String name, String start, String date){
-        GoogleCalApi gc = new GoogleCalApi();
-
 
         message = message.replace("<N>", name);
         message = message.replace("<T>", start);
