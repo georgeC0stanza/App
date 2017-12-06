@@ -48,6 +48,12 @@ import java.util.Set;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
+
+/**
+ * This activity is used to check for permission for the google services and calendar specifically,
+ * then to sign the user in, it will then return a list of events. This list has the title, start date,
+ * and notes.
+ */
 public class GoogleCalApi extends Activity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
@@ -86,10 +92,7 @@ public class GoogleCalApi extends Activity
         mCallApiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallApiButton.setEnabled(false);
-                mOutputText.setText("");
-                getResultsFromApi();
-                mCallApiButton.setEnabled(true);
+                buttonPress();
             }
         });
         activityLayout.addView(mCallApiButton);
@@ -113,7 +116,12 @@ public class GoogleCalApi extends Activity
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
     }
-
+    public void buttonPress(){
+        mCallApiButton.setEnabled(false);
+        mOutputText.setText("");
+        getResultsFromApi();
+        mCallApiButton.setEnabled(true);
+    }
 
 
     /**
@@ -346,6 +354,9 @@ public class GoogleCalApi extends Activity
             }
         }
 
+
+
+
         /**
          * Fetch a list of calendar events for tomorrow, this will return start date,
          * the title and the notes.
@@ -353,7 +364,7 @@ public class GoogleCalApi extends Activity
          * @throws IOException
          */
         public List<String> getDataFromApi() throws IOException {
-            //get tommorows date
+            //get tommorow's date
             String dt = "2017-11-22";
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c = Calendar.getInstance();
@@ -363,9 +374,12 @@ public class GoogleCalApi extends Activity
             String timestart = "T00:00:00";
             String endTime = "T23:59:59";
             String offset = "-07:00";
-            // set
+            // sets the start date and time using the above values to set the
+            // format that the events expect. This is where the data times are actually made.
             DateTime startday = new DateTime(dt + timestart + offset);
             DateTime endday = new DateTime(dt + endTime + offset);
+
+            // gets the list of events
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("primary")
                     .setTimeMax(endday)

@@ -19,33 +19,41 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 
-/* code examples from https://mobiforge.com/design-development/sms-messaging-android
+/**
+ * This is the activity that sends a text message from the premade templates using the google
+ * calendar events.
+ * our code examples from https://mobiforge.com/design-development/sms-messaging-android
  */
 public class SendText extends Activity {
-
+    //initializes buttons and EditTexts names
     Button btnLoadSMS;
     Button btnSendSMS;
     EditText txtPhoneNo;
     EditText txtMessage;
+
+    // Creates a log file for us to use for detection, this one was just to test functionality,
+    // we are sure we are not the first nerds to put this.
     private static final String tag = "Captains Log: ";
+
+    // intializes the event loader
     String appointmentLoad = null;
+
     /**
-     * creates the buttons, calls for permissions, fills in the text from the saved template,
-     * fills in the template markers with actual information.
+     * This activity creates the buttons, calls for permissions, fills in the text from the saved template,
+     * fills in the template markers with actual information, and then sends the texts to those in the event list.
      * @param savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_text);
-
+        // create the buttons and editTexts that we are going to use
         btnLoadSMS = (Button) findViewById(R.id.loadTemp);
         btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         txtPhoneNo = (EditText) findViewById(R.id.txtPhoneNo);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
 
-
-        // get permissions
+        // get permissions to send texts
         PermissionsRequest pR = new PermissionsRequest();
         pR.verifySMS(this);
 
@@ -53,8 +61,10 @@ public class SendText extends Activity {
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                GoogleCalApi gc = new GoogleCalApi();
+                gc.buttonPress();
 
- //               String phoneNo = txtPhoneNo.getText().toString();
+ //             String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
                 appointmentLoad = message;
                 fillSMS(appointmentLoad);
@@ -73,7 +83,7 @@ public class SendText extends Activity {
                 */
             }
         });
-
+        // this button loads the template that we have saved
         btnLoadSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // load template text
@@ -86,6 +96,10 @@ public class SendText extends Activity {
         });
     }
 
+    /**
+     * this fills the
+     * @param appointmentLoad
+     */
     private void fillSMS(String appointmentLoad) {
         String name = "";
         String start = "";
