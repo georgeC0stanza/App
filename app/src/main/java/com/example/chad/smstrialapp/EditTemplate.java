@@ -71,9 +71,7 @@ public class EditTemplate extends AppCompatActivity {
                         //listOfTemplateNames.add(templateName.getEntry());
                         ts.save(context, templateName.getEntry(), templateText.getText().toString());
                         ts.saveSet(context, "listOfTemplateNames", new HashSet(temporaryNames));
-                        Toast.makeText(getBaseContext(),
-                                spp.getEntry(),
-                                Toast.LENGTH_SHORT).show();
+
                         reload();
                     }
                 });
