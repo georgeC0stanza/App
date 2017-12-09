@@ -366,17 +366,8 @@ public class GoogleCalApi extends Activity
          */
         public List<String> getDataFromApi() throws IOException {
             //get tommorow's date
-            setDate tomorrowDate = new setDate();
+            SetDate tomorrowDate = new SetDate();
             String dt = tomorrowDate.getTomorrowsDate();
-
-
-            /*
-            String dt = "2017-11-22";
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar c = Calendar.getInstance();
-            c.add(Calendar.DATE, 1);
-            dt = df.format(c.getTime());
-*/
             String timestart = "T00:00:00";
             String endTime = "T23:59:59";
             String offset = "-07:00";
@@ -385,7 +376,7 @@ public class GoogleCalApi extends Activity
             DateTime startday = new DateTime(dt + timestart + offset);
             DateTime endday = new DateTime(dt + endTime + offset);
 
-            // gets the list of events
+            // gets the list of events which it sets to the min and max of tomorrow
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("primary")
                     .setTimeMax(endday)
@@ -395,6 +386,8 @@ public class GoogleCalApi extends Activity
                     .execute();
             List<Event> items = events.getItems();
 
+            // this gives us the list items in the event, we ask for the start time,
+            // title, and notes
             for (Event event : items) {
                 String title = event.getSummary();
                 String notes = event.getDescription();

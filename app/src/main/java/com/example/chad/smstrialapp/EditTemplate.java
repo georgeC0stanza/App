@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * The EditTemplate class is meant to set button layouts for the xml, as well as use the TemplateSave
+ * class to save the edited templates
+ */
 public class EditTemplate extends AppCompatActivity {
-
+//intialize variables
     Button saveTextButton;
     final Context context = this;
     EditText templateText;
@@ -18,10 +22,10 @@ public class EditTemplate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_template);
-
+// set variables
         saveTextButton = (Button) findViewById(R.id.saveText);
         templateText = (EditText) findViewById(R.id.templateText);
-
+// have the template save when the click the button.
         saveTextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

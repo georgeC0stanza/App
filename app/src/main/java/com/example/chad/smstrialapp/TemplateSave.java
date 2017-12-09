@@ -43,7 +43,6 @@ public class TemplateSave {
 
         editor.putStringSet(templateName, templateText);
         editor.apply();
-
         Toast.makeText(context, "saved!",
                 Toast.LENGTH_SHORT).show();
     }
@@ -57,7 +56,6 @@ public class TemplateSave {
     public String load(Context context, String templateName){
 
         String templateText = (getPrefs(context).getString(templateName, ""));
-
         return templateText;
     }
 
@@ -70,7 +68,6 @@ public class TemplateSave {
     public Set<String> loadSet(Context context, String templateName){
 
         Set<String> templateText = (getPrefs(context).getStringSet(templateName, null));
-
         return templateText;
     }
 

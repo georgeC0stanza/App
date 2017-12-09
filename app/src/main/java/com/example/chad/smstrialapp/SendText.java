@@ -77,19 +77,6 @@ public class SendText extends Activity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            /*
-                if (phoneNo.length() > 0 && message.length() > 0) {
-
-                    sendSMS(phoneNo, message);
-//                    sendCheckSMS(phoneNo, message);
-                }
-                else {
-                    Toast.makeText(getBaseContext(),
-                            "Please enter both phone number and message.",
-                            Toast.LENGTH_SHORT).show();
-                    Log.d(tag, "Send Message sms");
-                }
-                */
             }
         });
         // this button loads the template that we have saved
@@ -106,10 +93,12 @@ public class SendText extends Activity {
     }
 
     /**
-     * this fills the
+     * this gets event information, formats and initializes the data. It then calls the send function for each
+     * appoinment in the stack
      * @param appointmentLoad
      */
     private void fillSMS(String appointmentLoad) throws Exception {
+        // initialize event options
         String name = "";
         String start = "";
         String date = "";
@@ -120,10 +109,12 @@ public class SendText extends Activity {
         Set<String> appointmentLoadSet = ts.loadSet(SendText.this, "events");
         Stack<String> events = new Stack<>();
 
-
+        //gets the events from the appointment load
         if (CollectionUtils.isNotEmpty(appointmentLoadSet))
             events.addAll(appointmentLoadSet);
 
+        //makes a while loop that will get will get an appointment from the stack, tries to send a
+        // reminder message if the phone number is correct, until the stack is empty
             while(!events.empty()) {
                 String message = txtMessage.getText().toString();
                 appointmentLoad = message;
@@ -131,8 +122,10 @@ public class SendText extends Activity {
                 String event = events.peek();
             events.pop();
 
+            //creats a template object
             PopulateTemplate pt = new PopulateTemplate();
 
+            //get our events so we can access them
             date = event.substring(1, 10);
             start = event.substring(11, 17);
             name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
@@ -148,7 +141,7 @@ public class SendText extends Activity {
           //     String message = txtMessage.getText().toString();
                 //if (phoneNo.length() > 0 && message.length() > 0) {
 
-
+                //send a toast to inform the user if an appointment is not going to send
                 CheckPhoneValid NumberGood = new CheckPhoneValid();
                 if (NumberGood.PhoneValid(phoneNo) == false) {
                     Toast.makeText(getBaseContext(),
@@ -156,7 +149,10 @@ public class SendText extends Activity {
                             Toast.LENGTH_SHORT).show();
                 }
 
+                //if the number is not formatted correctly it does not send
+                if (NumberGood.PhoneValid(phoneNo) == true) {
                     sendSMS(phoneNo, appointmentLoad);
+                }
 //                    sendCheckSMS(phoneNo, message);
                 //}
                 //else {
