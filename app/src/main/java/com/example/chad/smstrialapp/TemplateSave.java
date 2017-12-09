@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.util.Set;
 
-public class TemplateSave {
+final public class TemplateSave {
     // defines variables we will use
     private SharedPreferences sharedPreferences;
     private static String PREF_NAME = "templates";
@@ -23,7 +23,7 @@ public class TemplateSave {
      * @param templateName
      * @param templateText
      */
-    public void save(Context context, String templateName, String templateText) {
+   static public void save(Context context, String templateName, String templateText) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         editor.putString(templateName, templateText);
         editor.apply();
@@ -38,7 +38,7 @@ public class TemplateSave {
      * @param templateName
      * @param templateText
      */
-    public void saveSet(Context context, String templateName, Set<String> templateText){
+   static public void saveSet(Context context, String templateName, Set<String> templateText){
         SharedPreferences.Editor editor = getPrefs(context).edit();
 
         editor.putStringSet(templateName, templateText);
@@ -54,7 +54,7 @@ public class TemplateSave {
      * @param templateName
      * @return
      */
-    public String load(Context context, String templateName){
+    static public String load(Context context, String templateName){
 
         String templateText = (getPrefs(context).getString(templateName, ""));
 
@@ -67,7 +67,7 @@ public class TemplateSave {
      * @param templateName
      * @return
      */
-    public Set<String> loadSet(Context context, String templateName){
+    static public Set<String> loadSet(Context context, String templateName){
 
         Set<String> templateText = (getPrefs(context).getStringSet(templateName, null));
 
