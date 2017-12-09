@@ -7,13 +7,13 @@ import android.widget.Toast;
 
 import java.util.Set;
 
-public class TemplateSave {
+ public class TemplateSave {
     // defines variables we will use
     private SharedPreferences sharedPreferences;
     private static String PREF_NAME = "templates";
     private static final String tag = "Captains Log: ";
 
-    private static SharedPreferences getPrefs(Context context) {
+    private  SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
@@ -53,7 +53,7 @@ public class TemplateSave {
      * @param templateName
      * @return
      */
-    public String load(Context context, String templateName){
+     public String load(Context context, String templateName){
 
         String templateText = (getPrefs(context).getString(templateName, ""));
         return templateText;
@@ -65,7 +65,7 @@ public class TemplateSave {
      * @param templateName
      * @return
      */
-    public Set<String> loadSet(Context context, String templateName){
+     public Set<String> loadSet(Context context, String templateName){
 
         Set<String> templateText = (getPrefs(context).getStringSet(templateName, null));
         return templateText;

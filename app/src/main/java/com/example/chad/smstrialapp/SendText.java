@@ -132,7 +132,7 @@ public class SendText extends Activity {
             phoneNo = event.substring(event.indexOf("[") + 1, event.indexOf("]")).replaceAll("[^\\d.]", "");
             appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
-         //   EditText editText = (EditText) findViewById(R.id.txtMessage);
+          //   EditText editText = (EditText) findViewById(R.id.txtMessage);
           //  editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
 
             Log.d(tag, "Load Message");
