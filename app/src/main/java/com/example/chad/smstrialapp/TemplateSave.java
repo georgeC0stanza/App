@@ -7,13 +7,13 @@ import android.widget.Toast;
 
 import java.util.Set;
 
-final public class TemplateSave {
+ public class TemplateSave {
     // defines variables we will use
     private SharedPreferences sharedPreferences;
     private static String PREF_NAME = "templates";
     private static final String tag = "Captains Log: ";
 
-    private static SharedPreferences getPrefs(Context context) {
+    private  SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
@@ -23,7 +23,7 @@ final public class TemplateSave {
      * @param templateName
      * @param templateText
      */
-   static public void save(Context context, String templateName, String templateText) {
+    public void save(Context context, String templateName, String templateText) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         editor.putString(templateName, templateText);
         editor.apply();
@@ -38,7 +38,7 @@ final public class TemplateSave {
      * @param templateName
      * @param templateText
      */
-   static public void saveSet(Context context, String templateName, Set<String> templateText){
+    public void saveSet(Context context, String templateName, Set<String> templateText){
         SharedPreferences.Editor editor = getPrefs(context).edit();
 
         editor.putStringSet(templateName, templateText);
@@ -54,7 +54,7 @@ final public class TemplateSave {
      * @param templateName
      * @return
      */
-    static public String load(Context context, String templateName){
+     public String load(Context context, String templateName){
 
         String templateText = (getPrefs(context).getString(templateName, ""));
 
@@ -67,7 +67,7 @@ final public class TemplateSave {
      * @param templateName
      * @return
      */
-    static public Set<String> loadSet(Context context, String templateName){
+     public Set<String> loadSet(Context context, String templateName){
 
         Set<String> templateText = (getPrefs(context).getStringSet(templateName, null));
 

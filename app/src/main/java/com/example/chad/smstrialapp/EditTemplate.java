@@ -25,7 +25,6 @@ public class EditTemplate extends AppCompatActivity {
 
     Button saveTextButton;
     Button deleteTextButton;
-    Context context;
     String currentTemplate;
     EditText templateText;
 
@@ -37,12 +36,19 @@ public class EditTemplate extends AppCompatActivity {
         setContentView(R.layout.activity_edit_template);
         final SavePopUp spp = new SavePopUp();
         final SavePopUp templateName = new SavePopUp();
-        context = this;
+        final Context context = this;
         currentTemplate = "";
         //deleteTextButton = (Button) findViewById(R.id.deleteTemp);
         saveTextButton = (Button) findViewById(R.id.saveText);
         templateText = (EditText) findViewById(R.id.templateText);
-        //if(TemplateSave.loadSet(this, "listOfTemplateNames").size() == 0);{}
+        TemplateSave ts = new TemplateSave();
+
+        if(ts.loadSet(this, "listOfTemplateNames") == null){
+            Set<String> createNames = new HashSet<>();
+        //createNames.add("default");
+
+            ts.saveSet(context, "listOfTemplateNames", new HashSet(createNames));
+        }
 
         saveTextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -59,6 +65,7 @@ public class EditTemplate extends AppCompatActivity {
 
                         templateName.setEntry(spp.getEntry());
                         TemplateSave ts = new TemplateSave();
+
                         Set<String> temporaryNames = ts.loadSet(context, "listOfTemplateNames");
                         temporaryNames.add(templateName.getEntry());
                         //listOfTemplateNames.add(templateName.getEntry());
@@ -93,8 +100,8 @@ public class EditTemplate extends AppCompatActivity {
             }
         });*/
 
-       Spinner betterSpinner = (Spinner) findViewById(R.id.spinner2);
-       betterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      Spinner betterSpinner = (Spinner) findViewById(R.id.spinner2);
+        betterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TemplateSave tempSave = new TemplateSave();
@@ -112,8 +119,8 @@ public class EditTemplate extends AppCompatActivity {
 
        });
 
-        TemplateSave ts = new TemplateSave();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,
+       // TemplateSave ts = new TemplateSave();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,
                 new ArrayList(ts.loadSet(context, "listOfTemplateNames")));
         betterSpinner.setAdapter(arrayAdapter);
         //addListenerOnSpinnerItemSelection();
