@@ -22,21 +22,30 @@ public class SMSTest {
     @Mock
     Context mMockContext;
 
-    private static final String phoneNumber = "253-22856650,2083601160";
+
 
     @Test
     public void Phone_number_correct() throws Exception {
+
+        CheckPhoneValid NumberGood = new CheckPhoneValid();
+        assertEquals(true, NumberGood.PhoneValid("801-572absd-8777"));
+        assertEquals(false, NumberGood.PhoneValid("2"));
+        assertEquals(false, NumberGood.PhoneValid("278054054055050450"));
+        assertEquals(true, NumberGood.PhoneValid("80//1-572absd-877@$!7"));
+
+
+        /*
+        String phoneNumber = "253-22/85j66l?5";
+        String PhoneAlNu = phoneNumber.replaceAll("[^\\d.]", "");
+
+        System.out.println(PhoneAlNu);
+        System.out.println(PhoneAlNu.length());
         Boolean Phone = true;
-        String[] stringArray = phoneNumber.split(",");
-        for (int i = 0; i < stringArray.length; i++) {
-            if (stringArray[i].length() < 9 || stringArray[i].length() > 9 ) {
+
+            if (PhoneAlNu.length() < 10 || PhoneAlNu.length() > 10 ) {
                 Phone = false;
-                System.out.println(Phone);
             }
-        if(Phone == false){
-            break;
-        }
-        }
         System.out.println(Phone);
+        */
     }
 }

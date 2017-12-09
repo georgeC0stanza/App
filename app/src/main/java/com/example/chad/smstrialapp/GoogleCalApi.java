@@ -35,6 +35,7 @@ import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -365,12 +366,17 @@ public class GoogleCalApi extends Activity
          */
         public List<String> getDataFromApi() throws IOException {
             //get tommorow's date
+            setDate tomorrowDate = new setDate();
+            String dt = tomorrowDate.getTomorrowsDate();
+
+
+            /*
             String dt = "2017-11-22";
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DATE, 1);
             dt = df.format(c.getTime());
-
+*/
             String timestart = "T00:00:00";
             String endTime = "T23:59:59";
             String offset = "-07:00";
@@ -423,6 +429,7 @@ public class GoogleCalApi extends Activity
                 ts.saveSet(GoogleCalApi.this, "events", events);
                 output.add(0, "Data retrieved using the Google Calendar API:");
                 mOutputText.setText(TextUtils.join("\n", output));
+                //save mservice to shared preferences.
             }
 
 

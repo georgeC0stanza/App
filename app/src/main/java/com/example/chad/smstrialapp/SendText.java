@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.gson.Gson;
+
 import org.apache.commons.collections4.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Set;
@@ -30,6 +35,8 @@ public class SendText extends Activity {
     Button btnSendSMS;
     EditText txtPhoneNo;
     EditText txtMessage;
+    GoogleAccountCredential mCredential;
+
 
     // Creates a log file for us to use for detection, this one was just to test functionality,
     // we are sure we are not the first nerds to put this.
@@ -61,13 +68,15 @@ public class SendText extends Activity {
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                GoogleCalApi gc = new GoogleCalApi();
-                gc.buttonPress();
 
  //             String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
                 appointmentLoad = message;
-                fillSMS(appointmentLoad);
+                try {
+                    fillSMS(appointmentLoad);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             /*
                 if (phoneNo.length() > 0 && message.length() > 0) {
 
@@ -100,7 +109,7 @@ public class SendText extends Activity {
      * this fills the
      * @param appointmentLoad
      */
-    private void fillSMS(String appointmentLoad) {
+    private void fillSMS(String appointmentLoad) throws Exception {
         String name = "";
         String start = "";
         String date = "";
@@ -127,7 +136,7 @@ public class SendText extends Activity {
             date = event.substring(1, 10);
             start = event.substring(11, 17);
             name = event.substring(event.indexOf("(") + 1, event.indexOf(")"));
-            phoneNo = event.substring(event.indexOf("[") + 1, event.indexOf("]"));
+            phoneNo = event.substring(event.indexOf("[") + 1, event.indexOf("]")).replaceAll("[^\\d.]", "");
             appointmentLoad = pt.pTemplate(appointmentLoad, name, start, date);
 
          //   EditText editText = (EditText) findViewById(R.id.txtMessage);
@@ -138,6 +147,14 @@ public class SendText extends Activity {
                 //String phoneNo = txtPhoneNo.getText().toString();
           //     String message = txtMessage.getText().toString();
                 //if (phoneNo.length() > 0 && message.length() > 0) {
+
+
+                CheckPhoneValid NumberGood = new CheckPhoneValid();
+                if (NumberGood.PhoneValid(phoneNo) == false) {
+                    Toast.makeText(getBaseContext(),
+                            "The phone number for "+ name + "was entered incorrectly",
+                            Toast.LENGTH_SHORT).show();
+                }
 
                     sendSMS(phoneNo, appointmentLoad);
 //                    sendCheckSMS(phoneNo, message);
