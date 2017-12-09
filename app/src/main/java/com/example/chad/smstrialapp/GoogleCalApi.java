@@ -366,7 +366,7 @@ public class GoogleCalApi extends Activity
          */
         public List<String> getDataFromApi() throws IOException {
             //get tommorow's date
-            SetDate tomorrowDate = new SetDate();
+            setDate tomorrowDate = new setDate();
             String dt = tomorrowDate.getTomorrowsDate();
             String timestart = "T00:00:00";
             String endTime = "T23:59:59";

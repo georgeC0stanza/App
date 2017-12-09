@@ -9,9 +9,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Test if the setdate function is setting the function for tomorrow, Jan 01, and the beginning of the next week.
  */
 public class ExampleUnitTest {
     @Test

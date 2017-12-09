@@ -68,8 +68,6 @@ public class SendText extends Activity {
         // send button
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
- //             String phoneNo = txtPhoneNo.getText().toString();
                 String message = txtMessage.getText().toString();
                 appointmentLoad = message;
                 try {
@@ -85,7 +83,6 @@ public class SendText extends Activity {
                 // load template text
                 TemplateSave ts = new TemplateSave();
                 String appointmentLoad = ts.load(SendText.this, "pianoAppointment");
-
                 EditText editText = (EditText) findViewById(R.id.txtMessage);
                 editText.setText(appointmentLoad, TextView.BufferType.EDITABLE);
             }
@@ -153,14 +150,12 @@ public class SendText extends Activity {
                 if (NumberGood.PhoneValid(phoneNo) == true) {
                     sendSMS(phoneNo, appointmentLoad);
                 }
-//                    sendCheckSMS(phoneNo, message);
-                //}
-                //else {
+                else {
                     Toast.makeText(getBaseContext(),
                             "Please enter both phone number and message.",
                             Toast.LENGTH_SHORT).show();
                     Log.d(tag, "Send Message sms");
-                //}
+                }
         }
     }
 

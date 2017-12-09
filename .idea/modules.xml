@@ -3,10 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\Chad\AndroidStudioProjects\SMSTrialApp\App.iml" filepath="C:\Users\Chad\AndroidStudioProjects\SMSTrialApp\App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Application.iml" filepath="$PROJECT_DIR$/.idea/Application.iml" />
+      <module fileurl="file://C:\Users\Chad\AndroidStudioProjects\app\.idea\Application.iml" filepath="C:\Users\Chad\AndroidStudioProjects\app\.idea\Application.iml" />
       <module fileurl="file://C:\Users\harrd\OneDrive\school\FALL 2017\CS246 - Java\Sms application\Application\SMSTrialApp.iml" filepath="C:\Users\harrd\OneDrive\school\FALL 2017\CS246 - Java\Sms application\Application\SMSTrialApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/app.iml" filepath="$PROJECT_DIR$/.idea/app.iml" />
+      <module fileurl="file://C:\Users\Chad\AndroidStudioProjects\app\app\app.iml" filepath="C:\Users\Chad\AndroidStudioProjects\app\app\app.iml" />
       <module fileurl="file://C:\Users\harrd\OneDrive\school\FALL 2017\CS246 - Java\Sms application\Application\app\app.iml" filepath="C:\Users\harrd\OneDrive\school\FALL 2017\CS246 - Java\Sms application\Application\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app-app.iml" filepath="$PROJECT_DIR$/app/app-app.iml" />
     </modules>
   </component>
 </project>

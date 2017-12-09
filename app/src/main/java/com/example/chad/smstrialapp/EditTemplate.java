@@ -18,17 +18,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * save and edit templates
+ */
 public class EditTemplate extends AppCompatActivity {
-    //List<String> listOfTemplateNames = new ArrayList<>();
+
 
     private static final String tag = "Captains Log: ";
-
+    //initalize buttons
     Button saveTextButton;
-    Button deleteTextButton;
     String currentTemplate;
     EditText templateText;
 
-
+    /**
+     * save and edit templates
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +43,12 @@ public class EditTemplate extends AppCompatActivity {
         final SavePopUp templateName = new SavePopUp();
         final Context context = this;
         currentTemplate = "";
-        //deleteTextButton = (Button) findViewById(R.id.deleteTemp);
         saveTextButton = (Button) findViewById(R.id.saveText);
         templateText = (EditText) findViewById(R.id.templateText);
         TemplateSave ts = new TemplateSave();
 
         if(ts.loadSet(this, "listOfTemplateNames") == null){
             Set<String> createNames = new HashSet<>();
-        //createNames.add("default");
 
             ts.saveSet(context, "listOfTemplateNames", new HashSet(createNames));
         }
@@ -68,7 +71,6 @@ public class EditTemplate extends AppCompatActivity {
 
                         Set<String> temporaryNames = ts.loadSet(context, "listOfTemplateNames");
                         temporaryNames.add(templateName.getEntry());
-                        //listOfTemplateNames.add(templateName.getEntry());
                         ts.save(context, templateName.getEntry(), templateText.getText().toString());
                         ts.saveSet(context, "listOfTemplateNames", new HashSet(temporaryNames));
 
@@ -78,25 +80,6 @@ public class EditTemplate extends AppCompatActivity {
                 builder.show();
             }
         });
-
-       /*deleteTextButton.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-
-                TemplateSave ts = new TemplateSave();
-                Set<String> temporaryNames = ts.loadSet(context, "listOfTemplateNames");
-                Iterator<String> it = temporaryNames.iterator();
-                while (it.hasNext()) {
-                    String s = it.next();
-                    if (s.contentEquals(currentTemplate)) {
-                        it.remove();
-                    }
-                }
-                ts.delete(context, currentTemplate);
-                //listOfTemplateNames.add(templateName.getEntry());
-                //ts.save(context, templateName.getEntry(), templateText.getText().toString());
-                ts.saveSet(context, "listOfTemplateNames", new HashSet(temporaryNames));
-            }
-        });*/
 
       Spinner betterSpinner = (Spinner) findViewById(R.id.spinner2);
         betterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -112,26 +95,27 @@ public class EditTemplate extends AppCompatActivity {
 
            @Override
            public void onNothingSelected(AdapterView<?> parent) {
-
            }
 
        });
 
-       // TemplateSave ts = new TemplateSave();
+        //this calls the logic for the drop down menu, for putting templates in.
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line,
                 new ArrayList(ts.loadSet(context, "listOfTemplateNames")));
         betterSpinner.setAdapter(arrayAdapter);
-        //addListenerOnSpinnerItemSelection();
-        //new ArrayList(ts.loadSet(context, "listOfTemplateNames"))
-
-
     }
 
+    /**
+     * set the default template for the send text
+     */
     public void setDefault(){
         TemplateSave ts = new TemplateSave();
         ts.save(this, "pianoAppointment", ts.load(this, currentTemplate));
     }
 
+    /**
+     * redraws the screen
+     */
     public void reload(){
         this.recreate();
     }
