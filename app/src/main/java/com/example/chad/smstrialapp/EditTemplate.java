@@ -13,37 +13,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class EditTemplate extends AppCompatActivity {
-    List<String> listOfTemplateNames = new ArrayList<>();
-
-    boolean needUpdate = false;
+    //List<String> listOfTemplateNames = new ArrayList<>();
 
     private static final String tag = "Captains Log: ";
 
     Button saveTextButton;
     Button deleteTextButton;
-    final Context context = this;
+    Context context;
+    String currentTemplate;
     EditText templateText;
-    String currentTemplate = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_edit_template);
-        final Context contex = this;
         final SavePopUp spp = new SavePopUp();
         final SavePopUp templateName = new SavePopUp();
-
+        context = this;
+        currentTemplate = "";
         //deleteTextButton = (Button) findViewById(R.id.deleteTemp);
         saveTextButton = (Button) findViewById(R.id.saveText);
         templateText = (EditText) findViewById(R.id.templateText);
@@ -98,7 +93,7 @@ public class EditTemplate extends AppCompatActivity {
             }
         });*/
 
-        Spinner betterSpinner = (Spinner) findViewById(R.id.spinner2);
+       Spinner betterSpinner = (Spinner) findViewById(R.id.spinner2);
        betterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
